@@ -1,15 +1,14 @@
 const fs = require("fs");
 const split = require("split");
 
-function splitFile(path) {
+function splitFile(path, cb) {
   let lines = [];
   const stream = fs.createReadStream(path);
   stream.pipe(split()).on("data", (line) => {
     lines.push(line);
   });
   stream.on("end", () => {
-    splitLine(lines);
-    return lines;
+	cb(lines)
   });
   stream.on("error", (err) => console.log(err));
 }
@@ -25,12 +24,19 @@ function splitLine(lines) {
   let str = "";
   for (i = 0; i < 29; i = i + 3) {
     const slice = getSlice(lines, i).replace(/\n/g, "");
-    str = str + String(parseNumber(slice));
+    str = str + String(parseDigit(slice));
   }
   console.log(str);
 }
 
-function parseNumber(slice) {
+function parseNumber (file, cb) {
+	splitFile(file, function (lines) {
+		splitLine(lines)
+	})
+}
+
+
+function parseDigit(slice) {
   const map = {
     " _ | ||_|": 0,
     "     |  |": 1,
@@ -52,4 +58,4 @@ module.exports = {
   splitLine,
 };
 
-splitFile("../../inputs/use_case_1/000000000");
+parseNumber("../../inputs/use_case_1/000000000");
