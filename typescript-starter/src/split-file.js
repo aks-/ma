@@ -16,35 +16,40 @@ function splitFile(path) {
 
 function getSlice(lines, start) {
   return lines.reduce((acc, line) => {
-	  acc = `${acc}\n${line.slice(start, start + 3)}`
-	  return acc;
-  }, '');
+    acc = `${acc}\n${line.slice(start, start + 3)}`;
+    return acc;
+  }, "");
 }
 
 function splitLine(lines) {
-	for (i=0; i < 29; i=i+3) {
-		console.log(getSlice(lines, i))
-	}
+  let str = "";
+  for (i = 0; i < 29; i = i + 3) {
+    const slice = getSlice(lines, i).replace(/\n/g, "");
+    str = str + String(parseNumber(slice));
+  }
+  console.log(str);
 }
 
 function parseNumber(slice) {
-	const map = {
-		'': '0',
-		'': '1',
-		'': '2',
-		'': '3',
-		'': '4',
-		'': '5',
-		'': '6',
-		'': '7',
-		'': '8',
-		'': '9',
-	}
+  const map = {
+    " _ | ||_|": 0,
+    "     |  |": 1,
+    " _  _||_ ": 2,
+    " _  _| _|": 3,
+    "   |_|  |": 4,
+    " _ |_  _|": 5,
+    " _ |_ |_|": 6,
+    " _   |  |": 7,
+    " _ |_||_|": 8,
+    " _ |_| _|": 9,
+  };
+  if (map[slice] === undefined) return "";
+  return map[slice];
 }
 
 module.exports = {
-	getSlice,
-	splitLine
+  getSlice,
+  splitLine,
 };
 
-splitFile("../test/input-sample");
+splitFile("../../inputs/use_case_1/000000000");
