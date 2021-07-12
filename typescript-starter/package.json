@@ -1,0 +1,23 @@
+{
+  "name": "typescript-starter",
+  "version": "0.0.0",
+  "description": "Typescript starter for the coding kata",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jimdo/coding-kata-bank-ocr.git"
+  },
+  "homepage": "https://github.com/Jimdo/coding-kata-bank-ocr#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/jest": "^26.0.24",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "ts-node": "^10.1.0"
+  }
+}
