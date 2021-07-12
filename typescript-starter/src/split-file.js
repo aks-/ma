@@ -8,7 +8,7 @@ function splitFile(path, cb) {
     lines.push(line);
   });
   stream.on("end", () => {
-	cb(lines)
+    cb(lines);
   });
   stream.on("error", (err) => console.log(err));
 }
@@ -26,15 +26,16 @@ function splitLine(lines) {
     const slice = getSlice(lines, i).replace(/\n/g, "");
     str = str + String(parseDigit(slice));
   }
-  console.log(str);
+
+  return str;
 }
 
-function parseNumber (file, cb) {
-	splitFile(file, function (lines) {
-		splitLine(lines)
-	})
+function parseNumber(file, cb) {
+  splitFile(file, (lines) => {
+    const str = splitLine(lines);
+    cb(str);
+  });
 }
-
 
 function parseDigit(slice) {
   const map = {
@@ -56,6 +57,5 @@ function parseDigit(slice) {
 module.exports = {
   getSlice,
   splitLine,
+  parseNumber,
 };
-
-parseNumber("../../inputs/use_case_1/000000000");
