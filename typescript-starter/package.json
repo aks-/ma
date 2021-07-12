@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Typescript starter for the coding kata",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "repository": {
     "type": "git",
